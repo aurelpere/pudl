@@ -117,8 +117,10 @@ class DatapackageDescriptor:
     ):
         if isinstance(
             parts.get(k), list
-        ):  # If partitions are list, match whole list if it contains desired element
-            return any(str(part).lower() == str(v).lower() for part in parts.get(k))
+        ):  # If partitions'key is a list, return true if any lowered element of the list contains lowered filter value(v)
+            return any(
+                str(element).lower() == str(v).lower() for element in parts.get(k)
+            )
         return str(parts.get(k)).lower() == str(v).lower()
 
     def get_resources(
